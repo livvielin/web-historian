@@ -6,39 +6,34 @@ var fs = require('fs');
 // require more modules/folders here!
 
 exports.handleRequest = function (req, res) {
-  var body = ""
-  //req.on('data', handlePostChunk(chunk, body));
   if(req.method === 'POST'){
-    req.on('data', function (chunk) {
-      body += chunk;
-    });
-    req.on('end', function() {
-      fs.appendFile(archive.paths.list, '/n' + body, function(err){
-        if(err){
-          throw err;
-        }
-        console.log('writing'+ body)
-        res.end();  
-      });
-    });
+  
+    //helpers.serveAssets(req, res, handleNewPage);
+    handleNewPage(req,res)
   }
   if ( req.url === '/' ) {
     req.url = '/index.html';
   }
-  helpers.serveAssets(res, req.url);
+  helpers.serveAssets(res, req.url, getHomePage);
 };
 
-var handlePostChunk = function(chunk, body){
-  body += chunk;
-};
 
-var handlePostFinish = function(body){
-  fs.appendFile(archive.paths.list, '/n' + body, function(err){
-    if(err){
-      throw err;
-    }
-    console.log('writing'+ body)
-    res.end();  
+
+var handleNewPage = function(req, res){
+  var body = '';
+  req.on('data', function (chunk) {
+      body += chunk;
   });
-  
+  req.on('end', function() {
+    
+    url = body.slice(4)
+    archive.addUrlToList(url);
+    body = '';
+      //helpers.serveAssets(res, '/loading.html');
+    //res.end();
+    });
 };
+
+var getHomePage = function(res){
+  res.end();
+}

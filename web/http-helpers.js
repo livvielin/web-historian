@@ -11,11 +11,13 @@ exports.headers = headers = {
 };
 
 exports.serveAssets = function(res, asset, callback) {
+  console.log(path.join(archive.paths.siteAssets, asset));
   fs.readFile(path.join(archive.paths.siteAssets, asset), function(err, data){
     if(err){
       throw err;
     }
-    res.end(data);
+    res.write(data);
+    callback(res);
   });  
 
 
