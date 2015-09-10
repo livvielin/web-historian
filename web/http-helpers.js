@@ -12,9 +12,9 @@ exports.headers = headers = {
 
 exports.serveAssets = function(res, asset, callback) {
   //TO-DO: Fix css
-  var url = path.join(archive.paths.siteAssets, asset);
-  if (asset !== '/index.html') {
-    url = path.join(archive.paths.archivedSites, asset);
+  var url = path.join(archive.paths.archivedSites, asset);
+  if (asset === '/index.html' || asset === '/loading.html') {
+    url = path.join(archive.paths.siteAssets, asset);
   }
   fs.readFile(url, function(err, data){
     if(err){
