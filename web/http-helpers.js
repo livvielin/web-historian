@@ -22,8 +22,6 @@ exports.serveAssets = function(res, asset, callback) {
     }
     res.write(data);
     callback(res);
-  });  
-
-
+  });
 };
 
