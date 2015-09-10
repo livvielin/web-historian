@@ -11,8 +11,12 @@ exports.headers = headers = {
 };
 
 exports.serveAssets = function(res, asset, callback) {
-  console.log(path.join(archive.paths.siteAssets, asset));
-  fs.readFile(path.join(archive.paths.siteAssets, asset), function(err, data){
+  //TO-DO: Fix css
+  var url = path.join(archive.paths.siteAssets, asset);
+  if (asset !== '/index.html') {
+    url = path.join(archive.paths.archivedSites, asset);
+  }
+  fs.readFile(url, function(err, data){
     if(err){
       throw err;
     }
