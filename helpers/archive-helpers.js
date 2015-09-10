@@ -10,7 +10,7 @@ var request = require('request');
  * customize it in any way you wish.
  */
 
-exports.paths = {
+ exports.paths = {
   siteAssets: path.join(__dirname, '../web/public'),
   archivedSites: path.join(__dirname, '../archives/sites'),
   list: path.join(__dirname, '../archives/sites.txt')
@@ -50,12 +50,12 @@ exports.isUrlInList = function(url, callback) {
 
 exports.addUrlToList = function(url, callback) {
   fs.appendFile(this.paths.list, url + '\n', function(err){
-      if(err){
-        throw err;
-      }
-      if (callback) {
-        callback();
-      }
+    if(err){
+      throw err;
+    }
+    if (callback) {
+      callback();
+    }
   });
 };
 

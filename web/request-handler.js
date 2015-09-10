@@ -42,7 +42,7 @@ var returnPage = function(req, res){
 var handleNewPage = function(req, res){
   var body = '';
   req.on('data', function (chunk) {
-      body += chunk;
+    body += chunk;
   });
   
   req.on('end', function() {
@@ -67,12 +67,7 @@ var handleNewPage = function(req, res){
       }
     });
     body = '';
-
-
-      //helpers.serveAssets(res, '/loading.html');
-    //helpers.serveAssets(res, '/loading.html', getHomePage);
-    //res.end();
-    });
+  });
 };
 
 var getHomePage = function(res){
