@@ -4,15 +4,26 @@ var helpers = require('./http-helpers');
 var fs = require('fs');
 
 // require more modules/folders here!
+var action = {
+
+  'GET' : function(req, res){
+    returnPage(req, res);
+  },
+  'POST' : function(req, res){
+    handleNewPage(req,res)
+  },
+  'OPTIONS' : function(req, res){
+    returnPage(req, res);
+  }
+}
 
 exports.handleRequest = function (req, res) {
   console.log("Type of request: " + req.method + " Request URL: " + req.url)
-  if(req.method === 'GET'){
-    returnPage(req, res);
-  }
-
-  if(req.method === 'POST'){
-    handleNewPage(req,res)
+  
+  if (action[req.method]){
+    action[req.method](req, res);
+  } else {
+    sendResponse(res, "404 -  File Not Found", 404);
   }
   
 };
@@ -31,8 +42,7 @@ var returnPage = function(req, res){
         helpers.serveAssets(res, req.url, getHomePage); 
       }
       else{
-        res.writeHead(404);
-        res.end();
+        sendResponse(res, '', 404);
       } 
     }); 
   }
@@ -73,3 +83,9 @@ var handleNewPage = function(req, res){
 var getHomePage = function(res){
   res.end();
 }
+
+var sendResponse = function(res, data, statusCode) {
+  statusCode = statusCode || 200;
+  res.writeHead(statusCode, helpers.headers);
+  res.end(JSON.stringify(data));
+};

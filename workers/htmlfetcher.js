@@ -1,3 +1,5 @@
+// * * * * * /usr/local/bin/node /Users/**USERNAME***/Codes/2015-08-web-historian/workers/htmlfetcher.js
+
 var archive = require('../helpers/archive-helpers');
 var _ = require('underscore');
 

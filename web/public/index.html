@@ -5,14 +5,30 @@
   <style type="text/css">
     body {
       margin : 0px;
-      font-family: arial, sans-serif;
+      font-family: 'Futura', sans-serif;
+      background-color: lightblue;
+      color: #f5f5f5;
+    }
+    #center {
+      text-align: center;
+      top: 50%;
+      left: 50%;
+    }
+    input {
+      height: 1.25em;
+      width: 250px;
+      font-size: 18px;
+      font-family: 'Comic Sans MS', sans-serif;
+      border-radius: 10px;
     }
   </style>
 </head>
 <body>
-  Enter a URL here:
-  <form method="POST">
-    <input type="input" name="url"></input>
-  </form>
+<div id="center">
+  <h2>Enter a URL here:</h2>
+    <form method="POST">
+      <input type="input" name="url"></input>
+    </form>
+  </div>
 </body>
 </html>
